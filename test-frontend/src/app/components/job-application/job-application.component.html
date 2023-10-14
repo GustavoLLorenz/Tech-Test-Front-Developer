@@ -1,1 +1,501 @@
-<p>job-application works!</p>
+<div class="container-fluid">
+  <app-change-lang backgroundColor="#FAFAFA" fontColor="#000"></app-change-lang>
+
+  <div class="row mt-5 text-center">
+    <div class="col-md-12">
+      <h1>Please Complete the form below:</h1>
+      <hr class="bg-primary">
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-10 col-lg-12 col-xl-10 mx-auto">
+      <section>
+
+        <form class="mr-5  mb-5" [formGroup]="form">
+
+          <div class="row">
+            <div class="col-12 mt-3">
+              <h5>Dados do Candidato</h5>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-sm-8 col-md-3 mt-3">
+              <label for="name"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>Nome</b></label>
+              <input type="text" formControlName="name" style="text-indent:20px;" class="form-control" id="name"
+                placeholder="name">
+
+              <div *ngIf="form.controls['name'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">nome 2</p>
+              </div>
+              <div *ngIf="form.controls['name'].errors?.['maxlength'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label for="email"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>email</b></label>
+              <input type="email" formControlName="email" style="text-indent:20px;" class="form-control" id="email"
+                placeholder="email">
+
+              <div *ngIf="form.controls['email'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">Erro</p>
+              </div>
+              <div *ngIf="form.controls['email'].errors?.['minlength'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro
+                </p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3">
+              <label for="phone"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>phone</b></label>
+              <input type="number" formControlName="phone" style="text-indent:20px;" class="form-control" id="phone"
+                placeholder="phone">
+
+              <div *ngIf="form.controls['phone'].errors?.['required'] && isSubmit " class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">id number error</p>
+              </div>
+              <div *ngIf="form.controls['phone'].errors?.['minlength'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">id number obg</p>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-8 mt-3" >
+              <div class="col-sm-12 col-md-3 mt-3">
+                <label for="skills" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>Select
+                    skill</b></label>
+                <select type="text" formControlName="skills" style="text-indent:20px;" class="form-control" id="skills"
+                  [(ngModel)]="selectedSkill" (change)="getSkill($event)">
+                  <option selected readonly disabled [value]="''">Select skill</option>
+                  <option *ngFor="let item of skillList; let i= index;" [value]="item">{{item}}</option>
+                </select>
+
+
+              </div>
+            </div>
+       
+
+
+                <div *ngFor="let item of selectedSkillList; let i = index" class="col-sm-12 col-md-8">
+                  <div class="categories-card mb-3 p-2 d-flex justify-content-between">
+                    <div class="pl-4 f-size-16 text-dark mr-2">
+                      {{item.skill}}
+
+                      <select type="text" style="width: 200px ; text-indent:20px;" class="form-control" id="skill"
+                        (change)="skillLevel($event)">
+                        <option selected readonly disabled [value]="''">select...</option>
+                        <option value="{{item.skill + ' <1'}}"> menor que 1 ano </option>
+                        <option value="{{item.skill + ' >1<2'}}">maior que 1 menor que 2</option>
+                        <option value="{{item.skill + ' >2<4'}}">maior que 2 menor que 4</option>
+                        <option value="{{item.skill + ' >5'}}">mais de 5 anos</option>
+                      </select>
+                    </div>
+                    <div class="cursor-pointer" (click)="removeItem(i, $event);">
+                      <img src="../../../assets/images/delete-X-icon.svg" class="img-msg-error" alt="x" id="skill">
+                    </div>
+                  </div>
+                
+            </div>
+
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-8 mt-3">
+              <div class="col-sm-12 col-md-3 mt-3">
+                <label for="languages"
+                  class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>Languages</b></label>
+                <select type="text" formControlName="languages" style="text-indent:20px;" class="form-control"
+                  id="languages" [(ngModel)]="selectedLanguage" (change)="getSkill($event)">
+                  <option selected readonly disabled [value]="''">Languages</option>
+                  <option *ngFor="let item of languageList; let i= index;" id="languages" [value]="item">{{item}}
+                  </option>
+                </select>
+
+                <div *ngIf="!form.controls['languages']?.value && isSubmit" class="div-msg-error mt-2">
+                  <img src="../../../assets/images/delete-X-icon.svg" class="img-msg-error" alt="">
+                  <p class="font-poppins font-size-14 m-0">erro idioma</p>
+                </div>
+              </div>
+            </div>
+       
+
+              <div *ngFor="let item of selectedLanguageList; let i = index" class="col-sm-12 col-md-8">
+                <div class="categories-card mb-3 p-2 d-flex justify-content-between">
+                  <div class="pl-4 f-size-16 text-dark">
+                    {{item.lan}}
+
+                    <select type="text" style=" width: 200px ;text-indent:20px;" class="form-control" id="languages"
+                      (change)="skillLevel($event)">
+                      <option selected readonly disabled [value]="''">select...</option>
+                      <option value="{{item.lan + ' basico'}}">basico</option>
+                      <option value="{{item.lan + ' intermediario'}}">intermediario</option>
+                      <option value="{{item.lan + ' avancado'}}">avancado</option>
+                      <option value="{{item.lan + ' avancado'}}">nativo/Fluente</option>
+                    </select>
+                  </div>
+                  <div class="cursor-pointer" (click)="removeItem(i, $event);">
+                    <img src="../../../assets/images/delete-X-icon.svg" class="img-msg-error" alt="" id="languages">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <div class="row">
+            
+                <div class="col-md-6">
+                  <button (click)="informEducationOrJob($event);" type="button" class="btn btn-dark btn-lg btn-block mb-4" id="edu">inform education</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-sm-12 col-md-4 mt-3">
+              <label for="education"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>education</b></label>
+              <input type="text" formControlName="education" style="text-indent:20px;" class="form-control"
+                id="education" placeholder="education">
+
+              <div *ngIf="form.controls['education'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">Erro</p>
+              </div>
+              <div *ngIf="form.controls['education'].errors?.['minlength'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro
+                </p>
+              </div>
+            </div> -->
+
+          </div>
+
+        </form>
+
+        <form class="mr-5" [formGroup]="collegeForm" *ngIf="education">
+
+          <div class="row">
+
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label for="collegeName" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>College Name</b></label>
+              <input type="text" formControlName="collegeName" style="text-indent:20px;" class="form-control"
+                id="collegeName" placeholder="College Name">
+
+              <div *ngIf="collegeForm.controls['collegeName'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">errCollege Name</p>
+              </div>
+              <div *ngIf="collegeForm.controls['collegeName'].errors?.['minlength'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">errCollege Name</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-5 mt-3">
+              <label for="course" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>Course </b></label>
+              <input type="text" formControlName="course" style="text-indent:20px;" class="form-control"
+                id="course" placeholder="Course">
+
+              <div *ngIf="collegeForm.controls['course'].errors?.['required'] && isSubmit"
+                class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro Course</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3">
+              <label for="start" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>data inicio</b></label>
+              <input type="date" formControlName="start" style="text-indent:20px;" class="form-control" id="start"
+                 >
+
+              <div *ngIf="collegeForm.controls['start'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro forn numero</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3">
+              <label for="end"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>data final</b></label>
+              <input type="date" formControlName="end" style="text-indent:20px;" class="form-control" id="end"
+                placeholder="end">
+
+              <div *ngIf="collegeForm.controls['end'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">data final</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-8 mt-3" >
+                <label for="status"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>situacao</b></label>
+                <select type="text" style=" width: 200px ;text-indent:20px;" class="form-control" id="status"
+                (change)="skillLevel($event)" formControlName="status">
+                <option selected readonly disabled [value]="''">select...</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Trancado">Trancado</option>
+                <option value="Concluido">Concluido</option>
+               
+              </select>
+
+              <div *ngIf="collegeForm.controls['status'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro pais</p>
+              </div>
+            </div>
+            
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label for="complement" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>informacao adicional</b></label>
+              <textarea formControlName="complement" style="text-indent:20px;" class="form-control" id="complement" placeholder="Informe informações adicionais" rows="4"></textarea>
+            
+              <div *ngIf="collegeForm.controls['complement'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">Erro na informação adicional</p>
+              </div>
+            </div>
+   
+
+          </div>
+          
+          <div class="mt-5">
+            <div class="row">
+
+              <div class="col-md-4">
+                <button (click)="saveInfo($event);" type="button" class="btn btn-dark btn-lg btn-block mb-4" id="edu">adicionar</button>
+              </div>
+            </div>
+          </div>
+
+          <!---- lista edu -->
+          <div class="row" *ngFor="let item of educationList">
+
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label  class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>College Name</b></label>
+              <input type="text"  style="text-indent:20px;"  class="form-control" disabled
+                id="collegeName" value={{item.collegeName}}>
+            </div>
+
+            <div class="col-sm-12 col-md-5 mt-3">
+              <label  class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>Course </b></label>
+              <input type="text"  style="text-indent:20px;" class="form-control" disabled
+                id="course" value={{item.course}}>
+
+
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3">
+              <label for="start" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>data inicio</b></label>
+              <input type="date" style="text-indent:20px;" id="start" class="form-control" disabled value={{item.start}}>
+
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3">
+              <label for="end"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>data final</b></label>
+              <input type="date"  style="text-indent:20px;" id="end" class="form-control" disabled
+                value={{item.end}}>
+
+            </div>
+
+            <div class="col-sm-12 col-md-8 mt-3" >
+                <label for="status"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>situacao</b></label>
+                <select type="text" style=" width: 200px ;text-indent:20px;"  id="status" class="form-control" disabled
+                (change)="skillLevel($event)">
+                <option selected readonly disabled [value]="''">{{item.status}}</option>
+   
+               
+              </select>
+
+      
+            </div>
+            
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label for="complement" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>informacao adicional</b></label>
+              <textarea  style="text-indent:20px;" class="form-control" disabled id="complement" value={{item.complement}} rows="4" ></textarea>
+            
+            </div>
+            <div class="col-sm-12 mt-3" style=" display: flex; justify-content: flex-end;">
+              <div class="cursor-pointer" (click)="removeForm(item, $event);">
+                <img src="../../../assets/images/delete-X-icon.svg" class="img-msg-error" alt="" id="edu">
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+        
+        <div class="mt-5">
+          <div class="row">
+        
+            <div class="col-md-6">
+              <button (click)="informEducationOrJob($event);" type="button" class="btn btn-dark btn-lg btn-block mb-4" id="job">inform job</button>
+            </div>
+          </div>
+        </div>
+
+        <!--job form-->
+        <form class="mr-5" [formGroup]="workHistoryForm" *ngIf="job">
+
+          <div class="row">
+
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label for="companyName" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>job Name</b></label>
+              <input type="text" formControlName="companyName" style="text-indent:20px;" class="form-control"
+                id="companyName" placeholder="College Name">
+
+              <div *ngIf="workHistoryForm.controls['companyName'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">err companyName companyName</p>
+              </div>
+              <div *ngIf="workHistoryForm.controls['companyName'].errors?.['minlength'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">errCollege Name</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-5 mt-3">
+              <label for="title" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>title </b></label>
+              <input type="text" formControlName="title" style="text-indent:20px;" class="form-control"
+                id="title" placeholder="title">
+
+              <div *ngIf="workHistoryForm.controls['title'].errors?.['required'] && isSubmit"
+                class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro title</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3">
+              <label for="start" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>data inicio</b></label>
+              <input type="date" formControlName="start" style="text-indent:20px;" class="form-control" id="start"
+                 >
+
+              <div *ngIf="workHistoryForm.controls['start'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">erro forn numero</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-3 mt-3">
+                <label for="status" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>Emprego atual?</b></label>
+                <input type="checkbox" class="form-check-input" id="status" (change)="getValue()" formControlName="status">
+                <div *ngIf="workHistoryForm.controls['status'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                  <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                  <p class="font-poppins font-size-14 m-0">Erro no campo de status</p>
+                </div>
+              </div>
+            
+              <div class="col-sm-12 col-md-3 mt-3" *ngIf="!currentJob" >
+                <label for="end" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>Data final</b></label>
+                <input type="date" formControlName="end" style="text-indent: 20px;" class="form-control" id="end" placeholder="end">
+                <div *ngIf="workHistoryForm.controls['end'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                  <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                  <p class="font-poppins font-size-14 m-0">Erro na data final</p>
+                </div>
+              </div>
+            </div>
+
+   
+            
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label for="description" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>job description</b></label>
+              <textarea formControlName="description" style="text-indent:20px;" class="form-control" id="description" placeholder="Informe informações adicionais" rows="4"></textarea>
+            
+              <div *ngIf="workHistoryForm.controls['description'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">Erro na informação adicional</p>
+              </div>
+            </div>
+   
+
+          </div>
+          
+          <div class="mt-5">
+            <div class="row">
+
+              <div class="col-md-4">
+                <button (click)="saveInfo($event);" type="button" class="btn btn-dark btn-lg btn-block mb-4" id="job">adicionar</button>
+              </div>
+            </div>
+          </div>
+
+          <!---- lista job -->
+          <div class="row" *ngFor="let item of jobList">
+
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label  class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>companyName Name</b></label>
+              <input type="text"  style="text-indent:20px;"  class="form-control" disabled
+                id="collegeName" value={{item.companyName}}>
+            </div>
+
+            <div class="col-sm-12 col-md-5 mt-3">
+              <label  class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>title </b></label>
+              <input type="text"  style="text-indent:20px;" class="form-control" disabled
+                id="course" value={{item.title}}>
+
+
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3">
+              <label for="start" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>data inicio</b></label>
+              <input type="date" style="text-indent:20px;" id="start" class="form-control" disabled value={{item.start}}>
+
+            </div>
+
+            <div class="col-sm-12 col-md-3 mt-3" *ngIf="!item.status">
+              <label for="end"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>data final</b></label>
+              <input type="date"  style="text-indent:20px;" id="end" class="form-control" disabled
+                value={{item.end}}>
+
+            </div>
+
+            <div class="col-sm-12 col-md-8 mt-3" >
+                <label for="status"
+                class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>emprego atual?</b></label>
+                <input type="checkbox" class="form-check-input" id="status" disabled checked={{item.status}}>
+            </div>
+            
+            <div class="col-sm-12 col-md-4 mt-3">
+              <label for="description" class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>description adicional</b></label>
+              <textarea  style="text-indent:20px;" class="form-control" disabled id="description" value={{item.description}} rows="4" ></textarea>
+            
+            </div>
+            <div class="col-sm-12 mt-3" style=" display: flex; justify-content: flex-end;">
+              <div class="cursor-pointer" (click)="removeForm(item, $event);">
+                <img src="../../../assets/images/delete-X-icon.svg" class="img-msg-error" alt="" id="job">
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+
+        <div class="mt-5">
+          <div class="row">
+            <div class="col-md-6">
+              <a href="/pages/fornecedor" type="button" class="bg-light btn-lg btn-block mb-4 text-center">
+                Cancelar
+              </a>
+            </div>
+            <div class="col-md-6">
+              <button (click)="onSubmit();" type="submit" class="btn btn-dark btn-lg btn-block mb-4">Aceitar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

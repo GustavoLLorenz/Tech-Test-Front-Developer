@@ -1,0 +1,38 @@
+{
+  "HOME": {
+    "TITLE": "Acerca del trabajo:",
+    "ABOUT-AITACA": "Acerca de Aitaca:",
+    "ABOUT": "Únete a nuestro equipo de vanguardia en el ámbito de la extracción de medidas corporales a partir de imágenes utilizando técnicas de aprendizaje profundo de última generación. Nos enorgullece desarrollar soluciones de primer nivel y valoramos la diversidad y experiencia de nuestros miembros del equipo.",
+    "OVERVIEW": "Descripción del puesto:",
+    "OVERVIEW-TEXT": "Estamos buscando un Apasionado Desarrollador Frontend para ayudar a dar vida a nuestras visiones digitales.",
+    "RESPONSIBILITIES": "Responsabilidades:",
+    "RES-1": "Desarrollar, probar y lanzar interfaces de usuario altamente receptivas e intuitivas.",
+    "RES-2": "Colaborar estrechamente con diseñadores de UX/UI para implementar soluciones frontend innovadoras.",
+    "RES-3": "Integrar funcionalidades de MediaPipe en nuestras aplicaciones frontend.",
+    "RES-4": "Optimizar aplicaciones para velocidad y escalabilidad, garantizando la seguridad de la aplicación.",
+    "RES-5": "Transformar los wireframes de diseño en el código que produce los elementos visuales de la aplicación.",
+    "RES-6": "Mantenerse actualizado sobre las tecnologías frontend emergentes y las mejores prácticas.",
+    "RES-7": "Colaborar con los desarrolladores backend para integrar elementos visibles para el usuario con la lógica del lado del servidor.",
+    "RES-8": "Utilizar GitHub de manera efectiva para la colaboración de código, control de versiones y revisiones de código.",
+    "RES-9": "Mantenerse actualizado sobre las tecnologías frontend emergentes, especialmente los desarrollos y mejores prácticas de MediaPipe.",
+    "REQUIREMENTS": "Requisitos:",
+    "REQ-1": "Experiencia comprobada como Desarrollador Frontend u un rol similar.",
+    "REQ-2": "Destreza en HTML, CSS, JavaScript/TypeScript.",
+    "REQ-3": "Conocimiento del framework Angular.",
+    "REQ-4": "Amplia destreza con GitHub para control de versiones, colaboración y mejores prácticas.",
+    "REQ-5": "Familiaridad con pruebas y depuración de navegadores.",
+    "REQ-6": "Sólido entendimiento de diseño adaptable y principios de diseño para dispositivos móviles.",
+    "REQ-7": "Experiencia con herramientas de optimización de rendimiento..",
+    "REQ-8": "Familiaridad con herramientas de control de versiones, preferiblemente Git.",
+    "REQ-9": "Excelentes habilidades para resolver problemas y atención al detalle.",
+    "REQ-10": "Habilidades sólidas de colaboración en equipo y buenas habilidades de comunicación.",
+    "SKILLS": "Habilidades y Experiencia Deseadas:",
+    "SKILL-1": "La experiencia en MediaPipe es una ventaja.",
+    "ATTRIBUTES": "Atributos:",
+    "ATT-1": "Excelentes habilidades de resolución de problemas.",
+    "ATT-2": "Mentalidad innovadora.",
+    "ATT-3": "Capacidad para trabajar de forma independiente.",
+    "BUTTON-APPLY": "¡Aplica ahora!"
+  }
+ 
+}

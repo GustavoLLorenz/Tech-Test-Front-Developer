@@ -1,2 +1,50 @@
-<p>home works!</p>
-<button (click)="goToJob()">Apply</button>
+
+<div class="container">
+  <app-change-lang></app-change-lang>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>{{"HOME.TITLE" | translate}}</h2>
+      <p>{{"HOME.ABOUT-AITACA" | translate}}</p>
+      
+      <p>
+        {{"HOME.ABOUT" | translate}}
+      </p>
+      <h3>{{"HOME.OVERVIEW" | translate}}</h3>
+      <p>{{"HOME.OVERVIEW-TEXT" | translate}}</p>
+      <h3>{{"HOME.RESPONSIBILITIES" | translate}}</h3>
+      <ul>
+        <li>{{"HOME.RES-1" | translate}}</li>
+        <li>{{"HOME.RES-2" | translate}}</li>
+        <li>{{"HOME.RES-3" | translate}}</li>
+        <li>{{"HOME.RES-4" | translate}}.</li>
+        <li>{{"HOME.RES-5" | translate}}</li>
+        <li>{{"HOME.RES-6" | translate}}</li>
+        <li>{{"HOME.RES-7" | translate}}</li>
+        <li>{{"HOME.RES-8" | translate}}</li>
+        <li>{{"HOME.RES-9" | translate}}</li>
+      </ul>
+      <h3>{{"HOME.REQUIREMENTS" | translate}}</h3>
+      <ul>
+        <li>{{"HOME.REQ-1" | translate}}</li>
+        <li>{{"HOME.REQ-2" | translate}}</li>
+        <li>{{"HOME.REQ-3" | translate}}</li>
+        <li>{{"HOME.REQ-4" | translate}}</li>
+        <li>{{"HOME.REQ-5" | translate}}</li>
+        <li>{{"HOME.REQ-6" | translate}}</li>
+        <li>{{"HOME.REQ-7" | translate}}</li>
+        <li>{{"HOME.REQ-8" | translate}}.</li>
+        <li>{{"HOME.REQ-9" | translate}}</li>
+        <li>{{"HOME.REQ-10" | translate}}</li>
+      </ul>
+      <h3>{{"HOME.SKILLS" | translate}}</h3>
+      <p>{{"HOME.SKILL-1" | translate}}</p>
+      <h3>{{"HOME.ATTRIBUTES" | translate}}</h3>
+      <ul>
+        <li>{{"HOME.ATT-1" | translate}}</li>
+        <li>{{"HOME.ATT-2" | translate}}</li>
+        <li>{{"HOME.ATT-3" | translate}}</li>
+      </ul>
+    </div>
+  </div>
+  <button (click)="goToJob()">{{"BUTTON-APPLY" | translate}}</button>
+</div>
