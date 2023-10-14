@@ -30,6 +30,11 @@ export class JobApplicationComponent {
   educationId: number = 0
   jobId: number = 0
   currentJob: boolean = false
+  addWork: boolean = true
+  addEdu: boolean = true
+  showCurrJob: boolean = true
+  skillLevelVerify: boolean = true
+  languageLevelVerify: boolean = true
   constructor(
     private formBuilder: FormBuilder,
     // private toastrService: ToastrService,
@@ -59,7 +64,7 @@ export class JobApplicationComponent {
       companyName: ["", [Validators.required]],
       title: ["", [Validators.required]],
       start: ["", [Validators.required]],
-      status: [false, [Validators.required]],
+      status: [false],
       end: [""],
       description: ["", [Validators.required]],
      
@@ -96,7 +101,7 @@ export class JobApplicationComponent {
       }
       
       this.selectedSkillList.push(skillSelectObj)
-      console.log(this.selectedSkillList)
+      
       this.skillList =  this.skillList.filter((item: string) => item !== this.selectedSkill)
     } 
 
@@ -105,38 +110,60 @@ export class JobApplicationComponent {
   saveInfo(event:any) {
     const { target: { id } } = event
     if (id === "edu") {
-      const edu = {
-        id: this.educationId += 1,
-        collegeName: this.collegeForm.controls["collegeName"].value,
-        course: this.collegeForm.controls["course"].value,
-        start: this.collegeForm.controls["start"].value,
-        end: this.collegeForm.controls["end"].value,
-        status: this.collegeForm.controls["status"].value,
-        complement: this.collegeForm.controls["complement"].value,
-  
+      this.addEdu = true
+      if(this.collegeForm.valid) {
+        const edu = {
+          id: this.educationId += 1,
+          collegeName: this.collegeForm.controls["collegeName"].value,
+          course: this.collegeForm.controls["course"].value,
+          start: this.collegeForm.controls["start"].value,
+          end: this.collegeForm.controls["end"].value,
+          status: this.collegeForm.controls["status"].value,
+          complement: this.collegeForm.controls["complement"].value,
+    
+        }
+    
+        this.educationList.push(edu)
+        this.collegeForm.reset()
+      } else {
+        this.addEdu = false
       }
-  
-      this.educationList.push(edu)
-      this.collegeForm.reset()
+ 
     } else {
-
-      const job = {
-        id: this.jobId += 1,
-        companyName: this.workHistoryForm.controls["companyName"].value,
-        title: this.workHistoryForm.controls["title"].value,
-        start: this.workHistoryForm.controls["start"].value,
-        status: this.workHistoryForm.controls["status"].value,
-        end: this.workHistoryForm.controls["end"].value,
-        description: this.workHistoryForm.controls["description"].value,
+      if(this.workHistoryForm.valid) {
+        this.addWork = true
+        const job = {
+          id: this.jobId += 1,
+          companyName: this.workHistoryForm.controls["companyName"].value,
+          title: this.workHistoryForm.controls["title"].value,
+          start: this.workHistoryForm.controls["start"].value,
+          status: this.workHistoryForm.controls["status"].value,
+          end: this.workHistoryForm.controls["end"].value,
+          description: this.workHistoryForm.controls["description"].value,
+        }
+        this.jobList.push(job)
+        this.workHistoryForm.reset()
+  
+      } else {
+        
+        this.addWork = false
+        
       }
-      this.jobList.push(job)
-      this.workHistoryForm.reset()
+      
     }
 
   }
 
-  getValue() {
-    this.currentJob = this.workHistoryForm.controls['status'].value
+  getValue(event: any) {
+    const { target: {  id, value } } = event
+    if (id === 'status') {
+      this.currentJob = this.workHistoryForm.controls['status'].value
+   
+    }
+    if (id === 'end') {
+      if (value !== '') this.showCurrJob = false
+      else this.showCurrJob = true
+    }
     
   }
 
@@ -190,7 +217,17 @@ export class JobApplicationComponent {
 
   onSubmit() {
      this.isSubmit = true;
-    
+    if(this.selectedSkillList.some((item: SkillSelectInterface) => item.level === '')) {
+      this.skillLevelVerify = false
+    } else {
+      this.skillLevelVerify = true
+    }
+
+    if(this.selectedLanguageList.some((item: LanguageSelectInterface) => item.level === '')) {
+      this.languageLevelVerify = false
+    } else {
+      this.languageLevelVerify = true
+    }
 
     const newCandidate: any = {
       name: this.form.controls["name"].value,
@@ -203,7 +240,7 @@ export class JobApplicationComponent {
 
 
     };
-    console.log(newCandidate)
+    if(this.form.valid && this.languageLevelVerify && this.skillLevelVerify) {
 
     // this.candidateServiceExample.register(newCandidate).subscribe({
     //   next: success => {
@@ -216,6 +253,12 @@ export class JobApplicationComponent {
     //     this.toastrService.success("example error", "", { progressBar: true });
     //   },
     // });
+   
+    localStorage.setItem('candidate', JSON.stringify(newCandidate));
+    this.router.navigate(["/success"]);
+    }
+ 
+
   }
 
 
