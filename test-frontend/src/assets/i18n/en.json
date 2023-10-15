@@ -86,5 +86,9 @@
     "JOB-TITLE":"Job Title is required!",
     "DESCRIPTION": "Description is required!"
     
+  } ,
+   "SUCCESS": {
+    "TITLE": "Thank you for applying.",
+    "TEXT": "we will assess your skills, and if there is a match, we will contact to provide you with instructions for the next steps!"
   }
 }

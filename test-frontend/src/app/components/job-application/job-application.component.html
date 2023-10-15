@@ -37,9 +37,14 @@
               <label for="email"
                 class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>{{ "WORK.EMAIL" | translate}}</b></label>
               <input type="email" formControlName="email" style="text-indent:20px;" class="form-control" id="email"
-                placeholder="{{ 'WORK.EMAIL' | translate}}">
+                placeholder="{{ 'WORK.EMAIL' | translate}}" >
 
               <div *ngIf="form.controls['email'].errors?.['required'] && isSubmit" class="div-msg-error mt-2">
+                <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
+                <p class="font-poppins font-size-14 m-0">{{ "ERROR.EMAIL" | translate}}</p>
+              </div>
+
+              <div *ngIf="form.controls['email'].errors?.['email'] && isSubmit" class="div-msg-error mt-2">
                 <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
                 <p class="font-poppins font-size-14 m-0">{{ "ERROR.EMAIL" | translate}}</p>
               </div>
@@ -49,8 +54,8 @@
             <div class="col-sm-12 col-md-3 mt-3">
               <label for="phone"
                 class="font-archivo font-size-16 font-weight-medium text-secondary m-0"><b>{{ "WORK.PHONE" | translate}}</b></label>
-              <input type="number" formControlName="phone" style="text-indent:20px;" class="form-control" id="phone"
-                placeholder="{{ 'WORK.PHONE' | translate}}">
+              <input type="text" formControlName="phone" style="text-indent:20px;" class="form-control" id="phone"
+                placeholder="{{ 'WORK.PHONE' | translate}}" (input)="validators($event)">
 
               <div *ngIf="form.controls['phone'].errors?.['required'] && isSubmit " class="div-msg-error mt-2">
                 <img src="../../../assets/images/icon-alert.svg" class="img-msg-error" alt="">
@@ -452,14 +457,14 @@
 
         </form>
 
-        <div class="mt-5">
+        <div class="mt-5" >
           <div class="row">
-            <div class="col-md-6">
-              <a href="/pages/fornecedor" type="button" class="bg-light btn-lg btn-block mb-4 text-center">
+            <div class="col-md-6" >
+              <a href="/" type="button" class="bg-light btn-lg btn-block mb-4 text-center">
                 {{ 'WORK.BACK-BUTTON' | translate}}  
               </a>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" >
               <button (click)="onSubmit();" type="submit" class="btn btn-dark btn-lg btn-block mb-4"> {{ 'WORK.APPLY-BUTTON' | translate}}</button>
             </div>
           </div>

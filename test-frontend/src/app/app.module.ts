@@ -10,6 +10,8 @@ import { SuccessPageComponent } from './components/success-page/success-page.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChangeLangComponent } from './components/change-lang/change-lang.component';
 import { HttpLoaderFactory } from 'src/services/http-load.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HttpLoaderFactory } from 'src/services/http-load.service';
     HomeComponent,
     JobApplicationComponent,
     SuccessPageComponent,
-    ChangeLangComponent
+    ChangeLangComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

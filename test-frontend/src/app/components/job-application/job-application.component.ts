@@ -37,19 +37,21 @@ export class JobApplicationComponent {
   languageLevelVerify: boolean = true
   constructor(
     private formBuilder: FormBuilder,
-    // private toastrService: ToastrService,
     private router: Router,
  
   ) {
+    
     this.form = this.formBuilder.group({
       name: ["", [Validators.required, Validators.maxLength(50)]],
-      email: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
       phone: ["", [Validators.required]],
       skills: [""],
       languages: ["", [Validators.required]],
       education: [""],
       workHistory: [""]
     });
+
+    
 
     this.collegeForm = this.formBuilder.group({
       collegeName: ["", [Validators.required]],
@@ -69,20 +71,35 @@ export class JobApplicationComponent {
       description: ["", [Validators.required]],
      
     });
-
+    
+ 
   }
 
   ngOnInit(): void {
     this.skillList = Object.keys(Tech)
     this.languageList = Object.keys(Language)
+    
   }
     
   informEducationOrJob(event: any){
     const { target: { id } } = event
     if(id === "edu") this.education = !this.education
-    else this.job = !this.job 
+    else this.job = !this.job
+     
   }
 
+  validators(event: any) {
+    const { target: { id } } = event
+    if(id === 'phone') {
+      const value = this.form.controls['phone'].value.toString()
+      const regex = /^[0-9]+$/;
+  
+      if (!regex.test(value)) {
+        this.form.controls['phone'].setValue(value.replace(/[^0-9]/g, ''));
+      }
+    }
+
+  }
   getSkill(event: any) {
 
     const { target: { id } } = event

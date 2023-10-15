@@ -86,6 +86,10 @@
     "JOB-TITLE":"¡El título del trabajo es obligatorio!",
     "DESCRIPTION": "¡La descripción es obligatoria!"
     
-  }
+  },
+  "SUCCESS": {
+   "TITLE": "¡Gracias por aplicar!",
+   "TEXT": "evaluarémos tus habilidades, y si hay una coincidencia, te contactaremos para proporcionarte instrucciones sobre los próximos pasos"
+ }
  
 }
