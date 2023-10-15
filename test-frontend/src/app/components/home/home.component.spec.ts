@@ -1,31 +1,41 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { By } from '@angular/platform-browser';
+import { ComponentFixture, TestBed , tick, fakeAsync} from '@angular/core/testing';
 import { HomeComponent } from './home.component';
-import { DebugElement } from '@angular/core';
+import { MockPipe } from '../../utils/mocks/mockPipe';
+import { Router } from '@angular/router';
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let debugElement: DebugElement;
-
+  let component: HomeComponent;
+  let router: Router;
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
-    })
-    .compileComponents();
+    TestBed.configureTestingModule({
+      declarations: [HomeComponent,MockPipe  ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement;
-    fixture.detectChanges();
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 
+
   it('should have a button', () => {
-    const button = debugElement.nativeElement.querySelector('button');
-    expect(button).toBeTruthy();
+    const buttonElement = fixture.debugElement.query(By.css('button'));
+
+    expect(buttonElement).toBeTruthy();
   });
+
+
+  it('should navigate to job route on button click', (() => {
+    const navigateSpy = jest.spyOn(router, 'navigate')
+    component.goToJob();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['job']);
+  }));
+ 
 });
