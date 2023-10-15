@@ -22,4 +22,7 @@ Add at least one unit test that tests some of the developed functionalities.
 During development, create at least three commits to show how you manage version control and organize your work. Make sure your code is well-commented and organized.
 
 ## Documentation
-Update README.md to include instructions on how to run and test your webpage and any additional functionality you have implemented.
+To run the project, install the dependencies with `yarn install` or `npm i` and then use the `yarn start` command to start the project.
+
+## Tests
+Three tests were developed for the home component to illustrate the use of Jest with Angular. To run the tests, use the command `npm run test home.component.spec.ts` at the project's root.
